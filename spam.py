@@ -1,4 +1,4 @@
-from nltk.tokenize import word_tokenize
+from nltk.tokenize import word_tokenize                        #Dependencies are Loaded
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
 import matplotlib.pyplot as plt
@@ -8,17 +8,13 @@ import pandas as pd
 import numpy as np
 import re
 
-mails = pd.read_csv('spam.csv', encoding = 'latin-1')
-
-mails.drop(['Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4'], axis = 1, inplace = True)
-
+mails = pd.read_csv('spam.csv', encoding = 'latin-1')                       #Loading data
+mails.drop(['Unnamed: 2', 'Unnamed: 3', 'Unnamed: 4'], axis = 1, inplace = True)     # Data is converted to a dataframe
 mails.rename(columns = {'v1': 'labels', 'v2': 'message'}, inplace = True)
-
 mails['label'] = mails['labels'].map({'ham': 0, 'spam': 1})
-
 mails.drop(['labels'], axis = 1, inplace = True)
 
-totalMails = 4825 + 747
+totalMails = 4825 + 747                     # Train and Test data Split
 trainIndex, testIndex = list(), list()
 for i in range(mails.shape[0]):
     if np.random.uniform(0, 1) < 0.75:
@@ -34,7 +30,7 @@ trainData.drop(['index'], axis = 1, inplace = True)
 testData.reset_index(inplace = True)
 testData.drop(['index'], axis = 1, inplace = True)
 
-spam_words = ' '.join(list(mails[mails['label'] == 1]['message']))
+spam_words = ' '.join(list(mails[mails['label'] == 1]['message']))                  # Visualization of spam words
 spam_wc = WordCloud(width = 512,height = 512).generate(spam_words)
 plt.figure(figsize = (10, 8), facecolor = 'k')
 plt.imshow(spam_wc)
@@ -42,7 +38,7 @@ plt.axis('off')
 plt.tight_layout(pad = 0)
 plt.show()
 
-ham_words = ' '.join(list(mails[mails['label'] == 0]['message']))
+ham_words = ' '.join(list(mails[mails['label'] == 0]['message']))                   # Visualization of Ham Words
 ham_wc = WordCloud(width = 512,height = 512).generate(ham_words)
 plt.figure(figsize = (10, 8), facecolor = 'k')
 plt.imshow(ham_wc)
@@ -52,21 +48,21 @@ plt.show()
 
 
 
-def process_message(message, lower_case = True, stem = True, stop_words = True, gram = 2):
+def process_message(message, lower_case = True, stem = True, stop_words = True, gram = 2):     # Data PreProcessing
     if lower_case:
-        message = message.lower()
-    words = word_tokenize(message)
+        message = message.lower()                                                              # Convert text to lowercase
+    words = word_tokenize(message)                                                             # Tokenization of word
     words = [w for w in words if len(w) > 2]
     if gram > 1:
         w = []
         for i in range(len(words) - gram + 1):
             w += [' '.join(words[i:i + gram])]
         return w
-    if stop_words:
+    if stop_words:                                                                             # Removing Stop Words
         sw = stopwords.words('english')
         words = [word for word in words if word not in sw]
     if stem:
-        stemmer = PorterStemmer()
+        stemmer = PorterStemmer()                                                              # Stemming of Words 
         words = [stemmer.stem(word) for word in words]   
     return words
 
