@@ -23,10 +23,10 @@ To test the model the data is split into train dataset and test dataset. The tra
 The matplotlib and WordCloud dependencies are used in the visualization of data.
 
 # Spam Data
-![](images/Capture.png)
+![](images/Capture.PNG)
 
 # Ham Data
-![](images/2.png)
+![](images/2.PNG)
 
 # 5.Training Model
 
@@ -68,10 +68,12 @@ For classifying a given message, first we preprocess it. For each word w in the 
 
 # 7.Result
 TF-IDF
-![](images/accuracy.png)
+
+![](images/accuracy.PNG)
 
 Bag Of Words
-![](images/accuracybow.png)
+
+![](images/accuracybow.PNG)
 
 # For Further Reading 
 
