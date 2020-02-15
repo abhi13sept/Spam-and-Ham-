@@ -23,10 +23,10 @@ To test the model the data is split into train dataset and test dataset. The tra
 The matplotlib and WordCloud dependencies are used in the visualization of data.
 
 # Spam Data
-![]()
+![](images/Capture.png)
 
 # Ham Data
-![]()
+![](images/2.png)
 
 # 5.Training Model
 
@@ -67,7 +67,11 @@ IDF(t) = log_e(Total number of documents / Number of documents with term t in it
 For classifying a given message, first we preprocess it. For each word w in the processed messaged we find a product of P(w|spam). If w does not exist in the train dataset we take TF(w) as 0 and find P(w|spam).We multiply this product with P(spam) The resultant product is the P(spam|message). Similarly, we find P(ham|message). Whichever probability among these two is greater, the corresponding tag (spam or ham) is assigned to the input message.
 
 # 7.Result
-![]()
+TF-IDF
+![](images/accuracy.png)
+
+Bag Of Words
+![](images/accuracybow.png)
 
 # For Further Reading 
 
